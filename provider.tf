@@ -1,10 +1,14 @@
-resource "aws_instance" "example" {
-    ami = var.ami_id
-    instance_type = var.inst_type
-    key_name = var.keyname
-    security_groups = var.security_group_names
+provider "aws" {
+  region                   = var.region
+  shared_credentials_files = ["~/.aws/credentials"]
+  profile                  = "default"
+}
 
-    tags = {
-        Name = var.tag_value
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
     }
+  }
 }
